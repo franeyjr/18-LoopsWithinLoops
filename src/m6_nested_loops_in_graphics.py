@@ -11,7 +11,7 @@ import rosegraphics as rg
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    # run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -166,10 +166,29 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    original_upper_right_corner = rectangle.get_upper_right_corner()
+    original_lower_left_corner = rectangle.get_lower_left_corner()
+    height = rectangle.get_height()
+    width = rectangle.get_width()
 
+    corner1 = original_upper_right_corner
+    corner2 = original_lower_left_corner
+
+    for j in range(n):
+        for k in range(j+1):
+            new_rectangle = rg.Rectangle(corner1,corner2)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+
+            corner1.x = corner1.x - width
+            corner2.x = corner2.x - width
+        corner1.y = corner1.y + height
+        corner2.y = corner2.y + height
+        corner1.x = rectangle.get_upper_right_corner().x
+        corner2.x = rectangle.get_lower_left_corner().x
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
